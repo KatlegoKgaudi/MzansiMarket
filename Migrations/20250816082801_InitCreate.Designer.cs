@@ -12,8 +12,8 @@ using MzansiMarket.Data;
 namespace MzansiMarket.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250815185954_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250816082801_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

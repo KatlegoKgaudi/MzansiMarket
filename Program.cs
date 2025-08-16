@@ -67,8 +67,9 @@ app.MapPost("/auth/register", async ([FromBody] RegisterUserDto dto, AppDbContex
 
 app.MapPost("/auth/login", async ([FromBody] LoginDto dto, AppDbContext db, IPasswordHasher hasher) =>
 {
-    var user = await db.Users.SingleOrDefaultAsync(u => u.Username == dto.Username);
-    if (user is null) return Results.BadRequest("Invalid credentials.");
+    var user = await db.Users.SingleOrDefaultAsync(u => u.Username == dto.Username || u.Email == dto.Username);
+    
+    if (user is null) return Results.Unauthorized();
 
     if (!hasher.Verify(dto.Password, user.PasswordHash, user.PasswordSalt))
         return Results.BadRequest("Invalid credentials.");
